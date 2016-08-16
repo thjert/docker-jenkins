@@ -1,4 +1,4 @@
-FROM jenkins
+FROM jenkins:1.642.1
 MAINTAINER Justin Menga <justin.menga@gmail.com>
 
 # Suppress apt installation warnings
@@ -22,7 +22,7 @@ ARG DOCKER_COMPOSE=1.6.2
 
 # Install base packages
 RUN apt-get update -y && \
-    apt-get install apt-transport-https curl python-dev python-setuptools gcc make -y && \
+    apt-get install apt-transport-https curl python-dev python-setuptools gcc make libssl-dev -y && \
     easy_install pip
 
 # Install Docker Engine
@@ -44,30 +44,3 @@ USER jenkins
 # Add Jenkins plugins
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
