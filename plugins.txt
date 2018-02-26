@@ -1,5 +1,4 @@
 apache-httpcomponents-client-4-api:latest
-mailer:latest
 ldap:latest
 display-url-api:latest
 git:latest
@@ -15,7 +14,6 @@ dockerhub-notification:latest
 aws-credentials:latest
 aws-java-sdk:latest
 amazon-ecs:latest
-workflow-aggregator:latest
 workflow-api:latest
 workflow-basic-steps:latest
 workflow-cps-global-lib:latest
@@ -26,6 +24,12 @@ workflow-scm-step:latest
 workflow-step-api:latest
 workflow-support:latest
 workflow-multibranch:latest
+pipeline-model-api:latest
+pipeline-model-declarative-agent:latest
+pipeline-model-extensions:latest
+pipeline-model-definition:latest
+pipeline-stage-tags-metadata:latest
+pipeline-milestone-step:latest
 pipeline-graph-analysis:latest
 pipeline-stage-step:latest
 pipeline-stage-view:latest
@@ -55,11 +59,6 @@ branch-api:latest
 zentimestamp:latest
 token-macro:latest
 jackson2-api:latest
-git-client:latest
-git-server:latest
 workflow-cps-global-lib:latest
-pipeline-rest-api:latest
-pipeline-stage-view:latest
-git:latest
 workflow-aggregator:latest
 jsch:latest
