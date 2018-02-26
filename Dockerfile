@@ -1,4 +1,4 @@
-FROM jenkins:1.642.1
+FROM jenkins:2.60
 MAINTAINER Justin Menga <justin.menga@gmail.com>
 
 # Suppress apt installation warnings
