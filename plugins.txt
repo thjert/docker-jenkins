@@ -1,3 +1,7 @@
+apache-httpcomponents-client-4-api:latest
+mailer:latest
+ldap:latest
+display-url-api:latest
 git:latest
 git-client:latest
 git-server:latest
@@ -22,6 +26,7 @@ workflow-scm-step:latest
 workflow-step-api:latest
 workflow-support:latest
 workflow-multibranch:latest
+pipeline-graph-analysis:latest
 pipeline-stage-step:latest
 pipeline-stage-view:latest
 pipeline-input-step:latest
@@ -50,3 +55,11 @@ branch-api:latest
 zentimestamp:latest
 token-macro:latest
 jackson2-api:latest
+git-client:latest
+git-server:latest
+workflow-cps-global-lib:latest
+pipeline-rest-api:latest
+pipeline-stage-view:latest
+git:latest
+workflow-aggregator:latest
+jsch:latest
