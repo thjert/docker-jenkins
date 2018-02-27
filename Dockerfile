@@ -34,10 +34,13 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C0
     apt-get install cgroupfs-mount -y && \
     apt-get install apparmor -y && \
     apt-get install yubico-piv-tool -y && \
-    apt-get install -t trusty-backports libsystemd-journal0 -y && \
+    apt-get install libsystemd-journal0 -y && \
     apt-get install docker-engine=${DOCKER_ENGINE:-1.10.2}-0~trusty -y && \
     usermod -aG docker jenkins && \
     usermod -aG users jenkins
+###    apt-get install libsystemd-journal0 -y && \
+###    apt-get install docker-engine=${DOCKER_ENGINE:-1.10.2}-0~trusty -y && \
+###    apt-get install docker-ce -y && \
 
 # Install Docker Compose
 RUN pip install docker-compose==${DOCKER_COMPOSE:-1.6.2} && \
