@@ -65,4 +65,6 @@ USER jenkins
 
 # Add Jenkins plugins
 COPY plugins.txt /usr/share/jenkins/plugins.txt
-RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
+###RUN /usr/local/bin/install-plugins.sh /usr/share/jenkins/plugins.txt
+RUN cat /usr/local/bin/install-plugins.sh
+RUN /usr/local/bin/install-plugins.sh `cat /usr/share/jenkins/plugins.txt`
