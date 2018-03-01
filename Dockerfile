@@ -65,7 +65,6 @@ RUN pip install docker-compose==${DOCKER_COMPOSE:-1.6.2} && \
 
 # Start dockerd due to error when running build from Jenkins
 RUN systemctl enable docker
-RUN netstat -an
 
 # Change to jenkins user
 USER jenkins
