@@ -1,4 +1,5 @@
-FROM jenkins:2.46.1
+FROM jenkins:2.60.3
+###FROM jenkins:1.642.1
 MAINTAINER Justin Menga <justin.menga@gmail.com>
 
 # Suppress apt installation warnings
@@ -19,6 +20,7 @@ RUN groupadd -g ${DOCKER_GID:-497} docker
 # NOTE: As of February 2016, AWS Linux ECS only supports Docker 1.9.1
 ARG DOCKER_ENGINE=1.10.2
 ARG DOCKER_COMPOSE=1.6.2
+ARG DOCKER_OPTS="-H tcp://0.0.0.0:2375"
 
 # Install base packages
 RUN apt-get update -y && \
@@ -49,6 +51,7 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C0
     apt-get install cgroupfs-mount -y && \
     apt-get install apparmor -y && \
     apt-get install docker-ce -y && \
+    apt-get install net-tools -y && \
     apt-get install yubico-piv-tool -y && \
     usermod -aG docker jenkins && \
     usermod -aG users jenkins
@@ -60,11 +63,17 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C0
 RUN pip install docker-compose==${DOCKER_COMPOSE:-1.6.2} && \
     pip install ansible boto boto3
 
+# Start dockerd due to error when running build from Jenkins
+RUN systemctl enable docker
+RUN netstat -an
+
 # Change to jenkins user
 USER jenkins
 
 # Add Jenkins plugins
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 ###RUN /usr/local/bin/install-plugins.sh /usr/share/jenkins/plugins.txt
-RUN cat /usr/local/bin/install-plugins.sh
-RUN /usr/local/bin/install-plugins.sh `cat /usr/share/jenkins/plugins.txt`
+###Script finns inte i 1.642.1
+###RUN cat /usr/local/bin/install-plugins.sh
+###RUN /usr/local/bin/-plugins.sh `cat /usr/share/jenkins/plugins.txt`
+RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
