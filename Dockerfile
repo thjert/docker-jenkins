@@ -20,7 +20,8 @@ RUN groupadd -g ${DOCKER_GID:-497} docker
 # NOTE: As of February 2016, AWS Linux ECS only supports Docker 1.9.1
 ARG DOCKER_ENGINE=1.10.2
 ARG DOCKER_COMPOSE=1.6.2
-ARG DOCKER_OPTS="-H tcp://0.0.0.0:2375"
+###ARG DOCKER_OPTS="-H tcp://0.0.0.0:2375"
+ARG DOCKER_OPTS="-H unix:///var/run/docker.sock"
 
 # Install base packages
 RUN apt-get update -y && \
@@ -64,7 +65,11 @@ RUN pip install docker-compose==${DOCKER_COMPOSE:-1.6.2} && \
     pip install ansible boto boto3
 
 # Start dockerd due to error when running build from Jenkins
-RUN systemctl enable docker
+RUN mkdir /etc/systemd/system/docker.service.d
+COPY docker.conf /etc/systemd/system/docker.service.d/docker.conf
+RUN systemctl enable docker.service
+RUN /etc/init.d/docker start
+RUN ps -ef
 
 # Change to jenkins user
 USER jenkins
@@ -74,5 +79,5 @@ COPY plugins.txt /usr/share/jenkins/plugins.txt
 ###RUN /usr/local/bin/install-plugins.sh /usr/share/jenkins/plugins.txt
 ###Script finns inte i 1.642.1
 ###RUN cat /usr/local/bin/install-plugins.sh
-###RUN /usr/local/bin/-plugins.sh `cat /usr/share/jenkins/plugins.txt`
-RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/install-plugins.sh `cat /usr/share/jenkins/plugins.txt`
+###RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
