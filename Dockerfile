@@ -62,7 +62,9 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C0
 RUN pip install docker-compose==${DOCKER_COMPOSE:-1.6.2} && \
     pip install ansible boto boto3
 
+################################################################################################################################### 
 ### Pga Request.callback (/app/node_modules/superagent/lib/node/index.js:698:17 provar jag installera detta.
+################################################################################################################################### 
 ###
 # update the repository sources list
 # and install dependencies
@@ -93,8 +95,9 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # confirm installation
 RUN node -v
+RUN nodejs -v
 RUN npm -v
-######################################### 
+################################################################################################################################### 
 ###RUN apt-get install npm
 RUN npm install superagent
 
