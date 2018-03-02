@@ -8,7 +8,6 @@ docker-commons:latest
 docker-build-publish:latest
 dockerhub-notification:latest
 aws-credentials:latest
-aws-java-sdk:latest
 amazon-ecs:latest
 icon-shim:latest
 async-http-client:latest
