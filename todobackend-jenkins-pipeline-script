@@ -1,29 +1,32 @@
-node {
+    node {
+    
+    stage ('Check values of variables') {
+        sh "echo env.DOCKER_USER says '${env.DOCKER_USER}'"
+        sh "echo env.DOCKER_PASSWORD says '${env.DOCKER_PASSWORD}'"
+        sh "echo env.DOCKER_EMAIL says '${env.DOCKER_EMAIL}'"
+    }
     git 'https://github.com/thjert/todobackend.git'
     try {
         stage ('Run unit/integration tests') {
-        sh 'make test'
+        sh 'make -f Makefile.v1 test'
         }
         
         stage ('Build application artefacts') {
-        sh 'make build'
+        sh 'make -f Makefile.v1 build'
         }
         
         stage ('Create release environment and run acceptance tests') {
-        sh 'make release'
+        sh 'make -f Makefile.v1 release'
         }
         
         stage ('Tag and publish release image') {
-        sh "make tag latest \$(git rev-parse --short HEAD) \$(git tag --points-at HEAD)"
-        sh "make buildtag master \$(git tag --points-at HEAD)"
+        sh "make -f Makefile.v1 tag latest \$(git rev-parse --short HEAD) \$(git tag --points-at HEAD)"
+        sh "make -f Makefile.v1 buildtag master \$(git tag --points-at HEAD)"
         
+        sh "printenv"
+        sh "make -f Makefile.v1 login"
         
-        withEnv(["DOCKER_USER=${DOCKER_USER}",
-        "DOCKER_PASSWORD=${DOCKER_PASSWORD}",
-        "DOCKER_EMAIL=${DOCKER_EMAIL}"]) {
-            sh "make login"
-        }
-        sh "make publish"
+        sh "make -f Makefile.v1 publish"
         }
     }
     finally {
@@ -32,10 +35,7 @@ node {
         }
         
         stage ('Clean up') {
-            sh 'make clean'
-            try {
-                sh 'make logout'
-            }   finally {}
+            sh 'make -f Makefile.v1 clean'
         }
     }
 }
