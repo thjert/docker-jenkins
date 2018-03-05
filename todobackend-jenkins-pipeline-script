@@ -33,7 +33,9 @@
         stage ('Collect test reports') {
         junit '**/reports/*.xml'
         }
-        
+                    try {
+                        sh 'make logout'
+                    }   finally {}
         stage ('Clean up') {
             sh 'make -f Makefile.v1 clean'
         }
