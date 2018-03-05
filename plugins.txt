@@ -25,7 +25,6 @@ subversion:latest
 durable-task:latest
 script-security:latest
 mailer:latest
-ace-editor:latest
 jquery-detached:latest
 cloudbees-folder:latest
 branch-api:latest
