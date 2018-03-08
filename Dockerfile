@@ -18,7 +18,7 @@ RUN groupadd -g ${DOCKER_GID:-497} docker
 
 # Used to control Docker and Docker Compose versions installed
 # NOTE: As of February 2016, AWS Linux ECS only supports Docker 1.9.1
-ARG DOCKER_ENGINE=1.10.2
+ARG DOCKER_ENGINE=${DOCKER_ENGINE:-1.10.2}
 ARG DOCKER_COMPOSE=1.6.2
 ###ARG DOCKER_OPTS="-H tcp://0.0.0.0:2375"
 ###ARG DOCKER_OPTS="-H unix:///var/run/docker.sock"
@@ -99,7 +99,7 @@ RUN nodejs -v
 RUN npm -v
 ################################################################################################################################### 
 ###RUN apt-get install npm
-RUN npm install superagent
+RUN npm install superagent superagent-promise bluebird chai-as-promised
 
 # Kopiera ut group-filen ... Filen med 497 som GID för docker låg kvar
 
